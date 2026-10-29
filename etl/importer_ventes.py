@@ -11,8 +11,8 @@ CSV_FILE = BASE_DIR / "data" / "vente_mysql.csv"
 # Connexion locale au serveur MySQL de Codespaces
 conn = mysql.connector.connect(
     host="localhost",
-    user="root",
-    password="",
+    user="tp_user",
+    password="TP_Commerce_2026!",
     database="dw_commerce"
 )
 
