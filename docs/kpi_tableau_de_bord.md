@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 cat > docs/kpi_tableau_de_bord.md <<'EOF'
 # KPI et maquette du tableau de bord commercial
@@ -22,10 +23,22 @@ incluses dans les montants des ventes payées.
 
 Les montants en USD et en CDF doivent toujours être présentés
 séparément, car aucun taux de change documenté n'est disponible.
+=======
+# KPI et maquette du tableau de bord commercial
+
+## 1. Objectif
+Définir les indicateurs clés de performance pour analyser les ventes dans l'entrepôt de données `dw_commerce`.
+
+## 2. Périmètre
+Les analyses financières portent sur les ventes au statut `Payée`. Les ventes `En attente` et `Annulée` restent disponibles pour les analyses par statut.
+
+Les montants USD et CDF sont présentés séparément, faute de taux de change documenté.
+>>>>>>> dce1e35 (Ajout des KPI et des résultats analytiques)
 
 ## 3. Indicateurs clés de performance
 
 ### KPI 1 — Nombre de ventes payées
+<<<<<<< HEAD
 
 **Définition :** nombre de transactions dont le statut est `Payée`.
 
@@ -164,10 +177,63 @@ des relances de l'ETL.
 
 ### Zone A — Indicateurs de synthèse
 
+=======
+- **Formule :** nombre de transactions au statut `Payée`.
+- **Utilité :** mesurer le volume des transactions payées.
+- **Dimensions :** date, magasin, produit, catégorie et devise.
+- **Visualisation :** carte KPI et évolution mensuelle.
+
+### KPI 2 — Montant total des ventes payées
+- **Formule :** somme de `montant_ligne` pour les ventes payées.
+- **Utilité :** suivre les montants des ventes réalisées.
+- **Dimensions :** date, magasin, catégorie et devise.
+- **Visualisation :** cartes distinctes USD et CDF, graphiques en barres.
+
+### KPI 3 — Quantité totale vendue
+- **Formule :** somme de `quantite` pour les ventes payées.
+- **Utilité :** mesurer le volume des produits commercialisés.
+- **Dimensions :** produit, catégorie, magasin et période.
+- **Visualisation :** classement des produits par quantité.
+
+### KPI 4 — Montant moyen par vente payée
+- **Formule :** montant total des ventes payées divisé par le nombre de ventes payées, pour une devise donnée.
+- **Utilité :** comparer la valeur moyenne des transactions.
+- **Dimensions :** magasin, période, catégorie et devise.
+- **Visualisation :** carte KPI par devise.
+
+### KPI 5 — Part des ventes payées
+- **Formule :** nombre de ventes payées / nombre total de ventes × 100.
+- **Utilité :** observer la répartition des statuts des transactions.
+- **Dimensions :** période, magasin et devise.
+- **Visualisation :** diagramme en anneau ou barres empilées.
+- **Précaution :** cet indicateur n'est pas un taux de conversion des prospects.
+
+### KPI 6 — Lignes rejetées par le contrôle qualité
+- **Formule :** nombre de lignes rejetées pendant une exécution ETL déterminée.
+- **Utilité :** suivre les anomalies des données sources.
+- **Dimensions :** type d'anomalie et exécution ETL.
+- **Visualisation :** histogramme des rejets par type.
+
+## 4. Dimensions d'analyse
+
+| Dimension | Attributs |
+|---|---|
+| Date | Jour, mois, trimestre, année |
+| Client | Code, segment, ville |
+| Produit | Code, nom, catégorie |
+| Magasin | Code, nom, ville |
+| Statut | Payée, En attente, Annulée |
+| Devise | USD, CDF |
+
+## 5. Maquette du tableau de bord
+
+### Zone A — Synthèse
+>>>>>>> dce1e35 (Ajout des KPI et des résultats analytiques)
 - Nombre de ventes payées.
 - Montant total en USD.
 - Montant total en CDF.
 - Quantité totale vendue.
+<<<<<<< HEAD
 - Montant moyen par vente, par devise.
 - Nombre de lignes rejetées pour l'exécution ETL considérée.
 
@@ -197,11 +263,31 @@ accompagné du volume total traité lors de l'exécution ETL.
 
 - Année.
 - Mois.
+=======
+- Montant moyen par vente et par devise.
+- Nombre de lignes rejetées pour l'exécution ETL considérée.
+
+### Zone B — Évolution temporelle
+Graphique mensuel des montants des ventes payées, avec une vue distincte pour chaque devise.
+
+### Zone C — Performance des magasins
+Graphique en barres des montants des ventes payées par magasin, séparés par devise.
+
+### Zone D — Analyse des produits
+Classement des produits par quantité vendue et tableau par catégorie.
+
+### Zone E — Qualité des données
+Graphique du nombre de rejets par type d'anomalie.
+
+### Filtres proposés
+- Année et mois.
+>>>>>>> dce1e35 (Ajout des KPI et des résultats analytiques)
 - Magasin.
 - Catégorie de produit.
 - Statut.
 - Devise.
 
+<<<<<<< HEAD
 ## 6. Règles de calcul et d'interprétation
 
 1. Les KPI financiers portent sur les ventes payées, sauf indication
@@ -236,3 +322,19 @@ La maquette peut être mise en œuvre dans un outil de visualisation
 après validation des requêtes SQL et des résultats produits par
 l'entrepôt `dw_commerce`.
 EOF
+=======
+## 6. Règles d'interprétation
+1. Les KPI financiers portent sur les ventes payées, sauf indication contraire.
+2. Les montants USD et CDF ne sont jamais additionnés.
+3. Les ventes annulées et en attente ne sont pas assimilées aux ventes payées.
+4. Les résultats du rapport doivent provenir de requêtes SQL effectivement exécutées.
+
+## 7. Limites
+- Aucun taux de change n'est disponible pour convertir USD et CDF.
+- La marge bénéficiaire ne peut pas être calculée sans données de coûts.
+- Le nombre de ventes payées ne constitue pas un taux de conversion des prospects.
+- Le suivi historique des rejets exige un journal distinguant les exécutions ETL.
+
+## 8. Conclusion
+Ces KPI permettent de suivre les ventes, les quantités commercialisées, les performances des magasins et la qualité des données. Le tableau de bord pourra être mis en œuvre après validation des requêtes SQL et des résultats de l'entrepôt `dw_commerce`.
+>>>>>>> dce1e35 (Ajout des KPI et des résultats analytiques)
